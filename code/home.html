@@ -8,15 +8,36 @@
 
 <body>
 	<div class=container>
-	<h1 class="lead">Unix Timestamp Converter</h1>
-		<form id="cleanDateForm">
-			<div class="form-group">
-		    	<input type="number" class="form-control"placeholder="Unix Timestamp">
-			</div>
-				<button type="submit" class="btn btn-primary">Convert</button>
-		</form>
-		<p class="cleanDate"><strong>Timezone: </strong>Date will display here</p>
+		<h1 class="lead">Unix Timestamp Converter</h1>
+			<form id="cleanDateForm" class="form-inline">
+				<div class="form-group">
+			    	<input type="number" class="form-control" placeholder="Unix Timestamp">
+			    <div>
+			    <h5><strong>OR</strong></h5>
+			    	<div class="form-group">
+			     		<p>
+				        <input style="width:3.5em;" class="form-control" name="month" type="text" id="m" size="2" maxlength="2" placeholder="MM">
+				        -
+				        <input style="width:3.5em;" class="form-control" name="day" type="text" id="d" size="2" maxlength="2" placeholder="DD">
+				        -
+				        <input style="width:5em;" class="form-control" name="year" type="text" id="y" size="4" maxlength="4" placeholder="YYYY">				        
+				     </p>  
+				        <div class="form-group">
+				        <input style="width:4em;" class="form-control" name="hours" type="text" id="hours" size="2" maxlength="2" placeholder="24H">
+				        :
+				        <input style="width:4em;" class="form-control" name="minutes" type="text" id="minutes" size="2" maxlength="2" placeholder="Min">
+				        :
+				        <input style="width:4em;" class="form-control" name="seconds" type="text" id="seconds" size="2" maxlength="2" placeholder="Sec">
+				        </div>
+			     		</p>
+			     	</div>
+			     	<p>
+						<button type="submit" class="btn btn-primary" style="vertical-align: top;">Convert</button>
+					</p>
+			</form>
+		<p class="cleanDate"><strong>Your Timezone: </strong>Date will display here</p>
 		<p class="cleanDateUtc"><strong>UTC: </strong>Date will display here</p>
+		<p class="unixDate"><strong>UNIX: </strong>Timestamp will display here</p>
 	</div>
 
 <script type="text/javascript" src="jquery.js"></script>

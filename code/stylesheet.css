@@ -1,8 +1,28 @@
 body {
-	height: 200px;
-	width: 300px;
+	width: 300px !important;
 }
 
 .lead {
 	font-weight: bold;
+}
+
+.container {
+	width: 466px !important;
+	margin: 0;
+}
+
+#cleanDateForm {
+	display: inline-block;
+}
+
+.form-control {
+	display: inline-block;
+}
+@media(min-width: 768px){
+	.container {
+		width: 400;
+	}
+	#cleanDateForm {
+		display: inline-block;
+	}
 }

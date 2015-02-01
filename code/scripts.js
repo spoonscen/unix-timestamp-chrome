@@ -1,11 +1,22 @@
 $("#cleanDateForm").on("submit", function(e){
 	e.preventDefault();
-    
-    var userNumber = $("input[type='number']").val();
 
-    $(".cleanDate").html('<strong>Your Timezone: </strong>' + cleanDate(userNumber));
-    $(".cleanDateUtc").html('<strong>UTC: </strong>' + cleanDateUtc(userNumber));
-});
+  var humanDate = $("input[name='year']").val() + "/" + $("input[name='month']").val() + "/" +  $("input[name='day']").val() + " " +
+                  $("input[name='hours']").val() + ":" + $("input[name='minutes']").val() + ":" + $("input[name='seconds']").val();
+
+  var userNumber = $("input[type='number']").val();
+
+if(userNumber !==  ""){
+  $(".cleanDate").html('<strong>Your Timezone: </strong>' + cleanDate(userNumber));
+  $(".cleanDateUtc").html('<strong>UTC: </strong>' + cleanDateUtc(userNumber));
+  $(".unixDate").html('<strong>UNIX: </strong>' + userNumber);
+}
+
+if(userNumber === ""){
+  $(".cleanDate").html('<strong>Your Timezone: </strong>' + cleanDate(unixTime(humanDate)));
+  $(".cleanDateUtc").html('<strong>UTC: </strong>' + cleanDateUtc(unixTime(humanDate)));
+  $(".unixDate").html('<strong>UNIX: </strong>' + unixTime(humanDate));
+}});
 
 function cleanDate(UNIX_timestamp){
   var a = new Date(UNIX_timestamp*1000);
@@ -16,7 +27,7 @@ function cleanDate(UNIX_timestamp){
   var hour = a.getHours() < 10 ? '0' + a.getHours() : a.getHours();
   var min = a.getMinutes() < 10 ? '0' + a.getMinutes() : a.getMinutes();
   var sec = a.getSeconds() < 10 ? '0' + a.getSeconds() : a.getSeconds();
-  var time = date + ', ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+  var time = month + '. ' + date + ', ' + year + ' ' + hour + ':' + min + ':' + sec;
   return time;
 }
 
@@ -29,6 +40,11 @@ function cleanDateUtc(UNIX_timestamp){
   var hour = a.getUTCHours() < 10 ? '0' + a.getUTCHours() : a.getUTCHours();
   var min = a.getUTCMinutes() < 10 ? '0' + a.getUTCMinutes() : a.getUTCMinutes();
   var sec = a.getUTCSeconds() < 10 ? '0' + a.getUTCSeconds() : a.getUTCSeconds();
-  var time = date + ', ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+  var time = month + '. ' + date + ', ' + year + ' ' + hour + ':' + min + ':' + sec ;
   return time;
+}
+
+function unixTime(humanDate){
+  var date = new Date(humanDate).getTime()/1000;
+  return date;
 }

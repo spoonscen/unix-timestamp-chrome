@@ -1,7 +1,7 @@
 {
   "name": "Unix Timestamp Converter",
-  "version": "0.0.0.1",
-  "description": "Convert UNIX timestamps into regular timestamps in both your timezone and UTC from the convenience of your browser",
+  "version": "0.1.0",
+  "description": "Convert time unix timestamps into human readable dates or human readable dates into unix timestamps.  You choose!",
   "manifest_version": 2,
   "browser_action": {
     "default_icon": "icon.png",
