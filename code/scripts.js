@@ -1,22 +1,54 @@
+setInterval( function(){
+  var unixCurrentTime = moment().unix();
+    $("input[name='number']").attr("placeholder", "Unix Timestamp eg: " + unixCurrentTime).html(++unixCurrentTime);
+}, 1000);
+
+var tz = jstz.determine();
+    console.log(tz.name());
+
+$(".yourTz").html("<strong>" + tz.name() + ": " + "</strong>");
+
+$("#cleanDateForm").on("reset", function(e){
+  if($(".cleanDate").html() !== 'Date will display here'){
+    $(".yourTz").html("<strong>" + tz.name() + ": " + "</strong>");
+    $(".cleanDate").hide().fadeIn().html('Date will display here');
+    $(".cleanDateUtc").hide().fadeIn().html('Date will display here');
+    $(".unixDate").hide().fadeIn().html('Timestamp will display here');
+    $("#cleanDateForm")[0].reset();
+    $("#MMDDYYYY").attr("class", "form-group");
+    $("#unixTimeInput").attr("class", "form-group");
+}});
+
 $("#cleanDateForm").on("submit", function(e){
 	e.preventDefault();
 
+
+  var userNumber = $("input[name='number']").val();
   var humanDate = $("input[name='year']").val() + "/" + $("input[name='month']").val() + "/" +  $("input[name='day']").val() + " " +
                   $("input[name='hours']").val() + ":" + $("input[name='minutes']").val() + ":" + $("input[name='seconds']").val();
 
-  var userNumber = $("input[type='number']").val();
+  if(userNumber === "" && humanDate === "// ::" ){
+    userNumber = moment().unix();
+  } else {
+    userNumber = $("input[name='number']").val();
+}
 
 if(userNumber !==  ""){
-  $(".cleanDate").html('<strong>Your Timezone: </strong>' + cleanDate(userNumber));
-  $(".cleanDateUtc").html('<strong>UTC: </strong>' + cleanDateUtc(userNumber));
-  $(".unixDate").html('<strong>UNIX: </strong>' + userNumber);
+  $(".cleanDate").html(cleanDate(userNumber));
+  $(".cleanDateUtc").html(cleanDateUtc(userNumber));
+  $(".unixDate").html(userNumber);
+  $(".unixDateUtc").html(unixTimeUTC(humanDate));
 }
 
 if(userNumber === ""){
-  $(".cleanDate").html('<strong>Your Timezone: </strong>' + cleanDate(unixTime(humanDate)));
-  $(".cleanDateUtc").html('<strong>UTC: </strong>' + cleanDateUtc(unixTime(humanDate)));
-  $(".unixDate").html('<strong>UNIX: </strong>' + unixTime(humanDate));
-}});
+  $(".cleanDate").html(cleanDate(unixTime(humanDate)));
+  $(".cleanDateUtc").html(cleanDateUtc(unixTime(humanDate)));
+  $(".unixDate").html(unixTime(humanDate));
+  $(".unixDateUtc").html(unixTimeUTC(humanDate));
+}
+
+});
+
 
 function cleanDate(UNIX_timestamp){
   var a = new Date(UNIX_timestamp*1000);
@@ -47,4 +79,10 @@ function cleanDateUtc(UNIX_timestamp){
 function unixTime(humanDate){
   var date = new Date(humanDate).getTime()/1000;
   return date;
+}
+
+function unixTimeUTC(humanDate){
+  var date = new Date(humanDate).getTime()/1000 - 18000;
+  return date;
+
 }

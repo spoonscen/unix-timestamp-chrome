@@ -3,43 +3,49 @@
 <head>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="stylesheet.css">
+
 <title>Unix Timestamp Converter</title>
+
 </head>
 
 <body>
 	<div class=container>
 		<h1 class="lead">Unix Timestamp Converter</h1>
 			<form id="cleanDateForm" class="form-inline">
-				<div class="form-group">
-			    	<input type="number" class="form-control" placeholder="Unix Timestamp">
+				<div id="unixTimeInput" class="form-group">
+			    	<input type="number" class="form-control" placeholder="Unix Timestamp eg:" min="0" max="999999999999" name="number" id="userNumber">
 			    <div>
-			    <h5><strong>OR</strong></h5>
-			    	<div class="form-group">
+			    <h5><strong>or</strong></h5>
+			    	<div id="MMDDYYYY" class="form-group">
 			     		<p>
-				        <input style="width:3.5em;" class="form-control" name="month" type="text" id="m" size="2" maxlength="2" placeholder="MM">
+				        <input style="width:3.9em;" class="form-control" name="month" type="number" id="m" size="2" min="1" max="12" placeholder="MM">
 				        -
-				        <input style="width:3.5em;" class="form-control" name="day" type="text" id="d" size="2" maxlength="2" placeholder="DD">
+				        <input style="width:3.5em;" class="form-control" name="day" type="number" id="d" size="2" min="1" max="31" placeholder="DD">
 				        -
-				        <input style="width:5em;" class="form-control" name="year" type="text" id="y" size="4" maxlength="4" placeholder="YYYY">				        
+				        <input style="width:5em;" class="form-control" name="year" type="number" id="y" size="4" min="0" max="9999" placeholder="YYYY">				        
 				     </p>  
-				        <div class="form-group">
-				        <input style="width:4em;" class="form-control" name="hours" type="text" id="hours" size="2" maxlength="2" placeholder="24H">
+				    <div id="HHMMSS" class="form-group">
+				        <input style="width:4em;" class="form-control" name="hours" type="number" id="hours" size="2" min="0" max="23" placeholder="24H">
 				        :
-				        <input style="width:4em;" class="form-control" name="minutes" type="text" id="minutes" size="2" maxlength="2" placeholder="Min">
+				        <input style="width:4em;" class="form-control" name="minutes" type="number" id="minutes" size="2" min="0" max="59" placeholder="Min">
 				        :
-				        <input style="width:4em;" class="form-control" name="seconds" type="text" id="seconds" size="2" maxlength="2" placeholder="Sec">
-				        </div>
+				        <input style="width:4em;" class="form-control" name="seconds" type="number" id="seconds" size="2" min="0" max="59" placeholder="Sec">
+				    </div>
 			     		</p>
 			     	</div>
 			     	<p>
 						<button type="submit" class="btn btn-primary" style="vertical-align: top;">Convert</button>
+						<button type="reset" class="btn btn-warning">Reset</button>
 					</p>
 			</form>
-		<p class="cleanDate"><strong>Your Timezone: </strong>Date will display here</p>
-		<p class="cleanDateUtc"><strong>UTC: </strong>Date will display here</p>
-		<p class="unixDate"><strong>UNIX: </strong>Timestamp will display here</p>
+		<p><strong><span class="yourTz">Your Timezone: </span></strong><span class="cleanDate">Date will display here</span></p>
+<!-- 		<p><strong>UNIX Timezone: </strong><span class="unixDateUtc">Timestamp will display here</span></p>		 -->
+		<p><strong>UTC: </strong><span class="cleanDateUtc">Date will display here</span></p>
+		<p><strong>Unix: </strong><span class="unixDate">Timestamp will display here</span></p>
 	</div>
 
+<script type="text/javascript" src="moment.js"></script>
+<script type="text/javascript" src="jstimezonedetect/jstz.main.js"></script>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="scripts.js"></script>
 

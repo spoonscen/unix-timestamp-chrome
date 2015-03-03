@@ -11,6 +11,10 @@ body {
 	margin: 0;
 }
 
+#userNumber {
+	width: 260px;
+}
+
 #cleanDateForm {
 	display: inline-block;
 }
@@ -25,4 +29,21 @@ body {
 	#cleanDateForm {
 		display: inline-block;
 	}
+}
+
+.currentMoment {
+	font-weight: 400;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.has-error {
+	border: 4px;
 }
