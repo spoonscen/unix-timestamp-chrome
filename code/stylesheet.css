@@ -2,6 +2,10 @@ body {
 	width: 300px !important;
 }
 
+h1.lead {
+	margin-bottom: 1px;
+}
+
 .lead {
 	font-weight: bold;
 }
@@ -46,4 +50,9 @@ input[type="number"] {
 
 .has-error {
 	border: 4px;
+}
+
+h6 {
+	font-weight: 200;
+	font-style: italic;
 }
