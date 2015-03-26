@@ -1,63 +1,55 @@
-
-// function that takes the current timestamp and increments it by 1 second to keep the current time
 setInterval( function(){
   var unixCurrentTime = moment().unix();
     $("input[name='number']").attr("placeholder", "Unix Timestamp eg: " + unixCurrentTime).html(++unixCurrentTime);
 }, 1000);
 
-//Get the current timezone from jstimezonedetect
 var tz = jstz.determine();
+    console.log(tz.name());
 
-
-//Display your actual timezone
 $(".yourTz").html("<strong>" + tz.name() + ": " + "</strong>");
 
-//reset the form to the placeholders
-$("#convertDateForm").on("reset", function(e){
+$("#cleanDateForm").on("reset", function(e){
   if($(".cleanDate").html() !== 'Date will display here'){
     $(".yourTz").html("<strong>" + tz.name() + ": " + "</strong>");
     $(".cleanDate").hide().fadeIn().html('Date will display here');
-    $(".convertedDateUtc").hide().fadeIn().html('Date will display here');
-    $(".convertedDateUnix").hide().fadeIn().html('Timestamp will display here');
-    $("#convertDateForm")[0].reset();
+    $(".cleanDateUtc").hide().fadeIn().html('Date will display here');
+    $(".unixDate").hide().fadeIn().html('Timestamp will display here');
+    $("#cleanDateForm")[0].reset();
     $("#MMDDYYYY").attr("class", "form-group");
     $("#unixTimeInput").attr("class", "form-group");
 }});
 
-
-//function to chang
-$("#convertDateForm").on("submit", function(e){
+$("#cleanDateForm").on("submit", function(e){
 	e.preventDefault();
 
-  var unixTimestampInput = $("input[name='number']").val();
+
+  var userNumber = $("input[name='number']").val();
   var humanDate = $("input[name='year']").val() + "/" + $("input[name='month']").val() + "/" +  $("input[name='day']").val() + " " +
                   $("input[name='hours']").val() + ":" + $("input[name='minutes']").val() + ":" + $("input[name='seconds']").val();
 
-  if(unixTimestampInput === "" && humanDate === "// ::" ){
-    unixTimestampInput = moment().unix();
+  if(userNumber === "" && humanDate === "// ::" ){
+    userNumber = moment().unix();
   } else {
-    unixTimestampInput = $("input[name='number']").val();
+    userNumber = $("input[name='number']").val();
 }
 
-
-//if the unix timestamp input is not equal to an empty string run these functions that convert the input
-if(unixTimestampInput !==  ""){
-  $(".cleanDate").html(cleanDate(unixTimestampInput));
-  $(".convertedDateUtc").html(convertedDateUtc(unixTimestampInput));
-  $(".convertedDateUnix").html(unixTimestampInput);
+if(userNumber !==  ""){
+  $(".cleanDate").html(cleanDate(userNumber));
+  $(".cleanDateUtc").html(cleanDateUtc(userNumber));
+  $(".unixDate").html(userNumber);
+  $(".unixDateUtc").html(unixTimeUTC(humanDate));
 }
 
-
-// if the unix timestamp input is equal to an empty string run the function to convert the human readable date into the unix timestamp
-if(unixTimestampInput === ""){
+if(userNumber === ""){
   $(".cleanDate").html(cleanDate(unixTime(humanDate)));
-  $(".convertedDateUtc").html(convertedDateUtc(unixTime(humanDate)));
-  $(".convertedDateUnix").html(unixTime(humanDate));
+  $(".cleanDateUtc").html(cleanDateUtc(unixTime(humanDate)));
+  $(".unixDate").html(unixTime(humanDate));
+  $(".unixDateUtc").html(unixTimeUTC(humanDate));
 }
 
 });
 
-//takes in a unix timestamp and creates a human readable date in your timezone
+
 function cleanDate(UNIX_timestamp){
   var a = new Date(UNIX_timestamp*1000);
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -71,9 +63,7 @@ function cleanDate(UNIX_timestamp){
   return time;
 }
 
-
-//takes a unix timestamp in and creates a human readable date in UTC
-function convertedDateUtc(UNIX_timestamp){
+function cleanDateUtc(UNIX_timestamp){
   var a = new Date(UNIX_timestamp*1000);
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   var year = a.getUTCFullYear();
@@ -86,9 +76,13 @@ function convertedDateUtc(UNIX_timestamp){
   return time;
 }
 
-
-//takes the human date in and outputs the unix timestamp
 function unixTime(humanDate){
   var date = new Date(humanDate).getTime()/1000;
   return date;
+}
+
+function unixTimeUTC(humanDate){
+  var date = new Date(humanDate).getTime()/1000 - 18000;
+  return date;
+
 }

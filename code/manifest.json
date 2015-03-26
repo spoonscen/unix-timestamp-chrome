@@ -1,10 +1,10 @@
 {
   "name": "Unix Timestamp Converter",
   "version": "0.1.2",
-  "description": "Convert time unix timestamps into human readable dates or human readable dates into unix timestamps. You choose!",
+  "description": "Convert time unix timestamps into human readable dates or human readable dates into unix timestamps.  You choose!",
   "manifest_version": 2,
   "browser_action": {
-    "default_icon": "img/icon.png",
+    "default_icon": "icon.png",
     "default_popup": "home.html",
     "default_name": "Unix Timestamps"
   }
