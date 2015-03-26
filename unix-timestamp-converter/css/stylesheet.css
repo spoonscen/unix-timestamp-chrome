@@ -15,11 +15,11 @@ h1.lead {
 	margin: 0;
 }
 
-#userNumber {
+#unixTimestampInput {
 	width: 260px;
 }
 
-#cleanDateForm {
+#convertDateForm {
 	display: inline-block;
 }
 
@@ -30,7 +30,7 @@ h1.lead {
 	.container {
 		width: 400;
 	}
-	#cleanDateForm {
+	#convertDateForm {
 		display: inline-block;
 	}
 }
