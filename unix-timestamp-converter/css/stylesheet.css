@@ -1,5 +1,9 @@
 body {
-	width: 300px !important;
+	max-width: 103%;
+	width: 103%;
+	height: 357px;
+    overflow-x: hidden;
+    font-size: 13px;
 }
 
 h1.lead {
@@ -11,8 +15,8 @@ h1.lead {
 }
 
 .container {
-	width: 466px !important;
 	margin: 0;
+
 }
 
 #unixTimestampInput {
@@ -21,18 +25,19 @@ h1.lead {
 
 #convertDateForm {
 	display: inline-block;
+	width: 260px;
+}
+
+#fulldate {
+	width: 260px;
+}
+
+#buttonGroup {
+	margin-top: 10px;
 }
 
 .form-control {
 	display: inline-block;
-}
-@media(min-width: 768px){
-	.container {
-		width: 400;
-	}
-	#convertDateForm {
-		display: inline-block;
-	}
 }
 
 .currentMoment {
@@ -54,5 +59,9 @@ input[type="number"] {
 
 h6 {
 	font-weight: 200;
-	font-style: italic;
+	font-style: italic}
+
+html {
+	height: 357px;
+	max-height: 375px;
 }

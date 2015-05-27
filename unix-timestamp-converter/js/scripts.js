@@ -25,15 +25,16 @@ $("#convertDateForm").on("reset", function(e){
 }});
 
 
-//function to chang
+//function to change
 $("#convertDateForm").on("submit", function(e){
 	e.preventDefault();
 
   var unixTimestampInput = $("input[name='number']").val();
-  var humanDate = $("input[name='year']").val() + "/" + $("input[name='month']").val() + "/" +  $("input[name='day']").val() + " " +
-                  $("input[name='hours']").val() + ":" + $("input[name='minutes']").val() + ":" + $("input[name='seconds']").val();
+  var humanDate = $("input[name='fulldate']").val();
+  console.log(humanDate);
+  var d1 = Date.parse(humanDate);
 
-  if(unixTimestampInput === "" && humanDate === "// ::" ){
+  if(unixTimestampInput === "" && d1 === null ){
     unixTimestampInput = moment().unix();
   } else {
     unixTimestampInput = $("input[name='number']").val();
@@ -50,9 +51,9 @@ if(unixTimestampInput !==  ""){
 
 // if the unix timestamp input is equal to an empty string run the function to convert the human readable date into the unix timestamp
 if(unixTimestampInput === ""){
-  $(".cleanDate").html(cleanDate(unixTime(humanDate)));
-  $(".convertedDateUtc").html(convertedDateUtc(unixTime(humanDate)));
-  $(".convertedDateUnix").html(unixTime(humanDate));
+  $(".cleanDate").html(cleanDate(unixTime(d1)));
+  $(".convertedDateUtc").html(convertedDateUtc(unixTime(d1)));
+  $(".convertedDateUnix").html(unixTime(d1));
 }
 
 });
@@ -88,7 +89,7 @@ function convertedDateUtc(UNIX_timestamp){
 
 
 //takes the human date in and outputs the unix timestamp
-function unixTime(humanDate){
-  var date = new Date(humanDate).getTime()/1000;
-  return date;
+function unixTime(d1){
+  var date = new Date(d1).getTime()/1000;
+  return Math.round(date);
 }
