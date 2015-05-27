@@ -2,7 +2,7 @@
 
 This is an extension for chrome that converts a unix timestamp into a human readable date and time.
 
-![alt tag](https://github.com/CoryNoonan/unix-timestamp-chrome/blob/master/screen-shot.png)
+![alt tag](http://i.imgur.com/IUmygSo.png)
 
 ### Install
 
