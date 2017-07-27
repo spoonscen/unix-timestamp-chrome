@@ -4,15 +4,15 @@ const moment = require('moment')
 
 const timezoneName = determine().name()
 const [cleanDateElement] = document.getElementsByClassName("cleanDate")
-const [convertedDateUtcElement] = document.getElementsByClassName("convertedDateUtc")
+const [convertedDateUtcElement] = document.getElementsByClassName("cleanDateUtc")
 const [convertedDateUnixElement] = document.getElementsByClassName("convertedDateUnix")
 const unixTimestampInput = document.getElementById('unixTimestampInput')
 const humanDateInput = document.getElementById('fulldate')
 const oneSecond = 1000
-const setPlaceholderText = () => unixTimestampInput.placeholder = `Unix Timestamp eg: ${moment().unix()}`
 
-setPlaceholderText()
-setInterval(setPlaceholderText, oneSecond)
+const setPlaceholderText = (timestamp) => unixTimestampInput.placeholder = `Unix Timestamp eg: ${timestamp}`
+setPlaceholderText(moment().unix())
+setInterval(() => setPlaceholderText(moment().unix()), oneSecond)
 
 const submit = (e) => {
   e.preventDefault()
@@ -21,12 +21,12 @@ const submit = (e) => {
   const unixTimestampInputValue = bothInputsEmpty ? moment().unix() : unixTimestampInput.value
 
   cleanDateElement.innerHTML = cleanDate(unixTimestampInputValue)
-  convertedDateUtcElement.innerHTML = convertedDateUtc(unixTimestampInputValue)
+  convertedDateUtcElement.innerHTML = cleanDateUtc(unixTimestampInputValue)
   convertedDateUnixElement.innerHTML = unixTimestampInputValue
 
   if (humanDateValue) {
     cleanDateElement.innerHTML = cleanDate(getUnixTimestamp(humanDateValue))
-    convertedDateUtcElement.innerHTML = convertedDateUtc(getUnixTimestamp(humanDateValue))
+    convertedDateUtcElement.innerHTML = cleanDateUtc(getUnixTimestamp(humanDateValue))
     convertedDateUnixElement.innerHTML = getUnixTimestamp(humanDateValue)
   }
 }
@@ -39,12 +39,15 @@ const reset = () => {
   convertedDateUnixElement.innerHTML = 'Timestamp will display here'
 }
 
+const getDate = (timestamp) => new Date(timestamp * 1000)
+const dateFormat = 'MMMM Do YYYY, HH:mm:ss a'
+
 function cleanDate(timestamp) {
-  return moment(new Date(timestamp * 1000)).format('MMMM Do YYYY, HH:mm:ss a')
+  return moment(getDate(timestamp)).format(dateFormat)
 }
 
-function convertedDateUtc(timestamp) {
-  return moment.utc(new Date(timestamp * 1000)).format('MMMM Do YYYY, HH:mm:ss a')
+function cleanDateUtc(timestamp) {
+  return moment.utc(getDate(timestamp)).format(dateFormat)
 }
 
 function getUnixTimestamp(humanDate) {
@@ -54,7 +57,7 @@ function getUnixTimestamp(humanDate) {
 
 module.exports = {
   getUnixTimestamp: getUnixTimestamp,
-  convertedDateUtc: convertedDateUtc,
+  cleanDateUtc: cleanDateUtc,
   cleanDate: cleanDate
 }
 
