@@ -2,7 +2,7 @@
   "name": "unix-timestamp-converter",
   "version": "1.0.0",
   "description": "Chrome Extension for converting unix timestamps",
-  "main": "index.js",
+  "main": "./js/scripts.js",
   "scripts": {
     "bundle": "webpack ./js/scripts.js ./public/bundle.js",
     "test": "mocha ./js/scripts.js"
@@ -10,17 +10,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "datejs": "^1.0.0-rc3",
-    "jQuery": "^1.7.4",
-    "jquery": "2.1.4",
+    "datejs": "1.0.0-rc3",
     "jstimezonedetect": "1.0.5",
     "moment": "2.10.3"
   },
   "devDependencies": {
-    "chai": "^4.1.0",
-    "jsdom": "^11.1.0",
-    "jstz": "^1.0.10",
-    "mocha": "^3.4.2",
-    "webpack": "^3.4.1"
+    "chai": "4.1.0",
+    "jsdom": "11.1.0",
+    "jstz": "1.0.10",
+    "mocha": "3.4.2",
+    "webpack": "3.4.1"
   }
 }
