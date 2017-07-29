@@ -12,7 +12,7 @@ class App extends React.Component {
       dateInYourTimeZone: '',
       dateInUtc: '',
       unixTimeStamp: '',
-      currentTime: moment().unix()
+      currentTime: moment().unix(),
     }
     this.handleUnixInputDate = this.handleUnixInputDate.bind(this)
     this.handleHumanInputDate = this.handleHumanInputDate.bind(this)
@@ -20,12 +20,18 @@ class App extends React.Component {
     this.onSubmit = this.onSubmit.bind(this)
   }
 
-  handleUnixInputDate(event) {
-    this.setState({unixTimestampInput: event.target.value});
+  handleUnixInputDate({ target: { value } }) {
+      this.setState({
+        unixTimestampInput: value.slice(0, 10),
+        humanDateInputValue: ''
+      })
   }
 
-  handleHumanInputDate(event) {
-    this.setState({humanDateInputValue: event.target.value});
+  handleHumanInputDate({ target: { value } }) {
+    this.setState({
+      humanDateInputValue: value,
+      unixTimestampInput: ''
+    })
   }
 
   resetForm() {
@@ -64,7 +70,7 @@ class App extends React.Component {
       dateInYourTimeZone,
       dateInUtc,
       unixTimeStamp,
-      currentTime
+      currentTime,
     } = this.state
 
     return (
