@@ -13,6 +13,8 @@ class App extends React.Component {
     }
     this.handleUnixInputDate = this.handleUnixInputDate.bind(this)
     this.handleHumanInputDate = this.handleHumanInputDate.bind(this)
+    this.resetForm = this.resetForm.bind(this)
+
   }
 
   handleUnixInputDate(event) {
@@ -21,6 +23,16 @@ class App extends React.Component {
 
   handleHumanInputDate(event) {
     this.setState({humanDateInputValue: event.target.value});
+  }
+
+  resetForm() {
+    this.setState({
+      unixTimestampInput: '',
+      humanDateInputValue: '',
+      dateInYourTimeZone: '',
+      dateInUtc: '',
+      unixTimeStamp: ''
+    });
   }
 
 
@@ -49,7 +61,7 @@ class App extends React.Component {
     			<div id="buttonGroup">
     				<p>
     					<button id="submit" type="submit" className="btn btn-primary">Convert</button>
-    					<button id="reset" type="reset" className="btn btn-warning">Reset</button>
+    					<button onClick={this.resetForm} id="reset" type="reset" className="btn btn-warning">Reset</button>
     				</p>
     			</div>
     		</form>
