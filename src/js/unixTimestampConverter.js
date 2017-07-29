@@ -3,11 +3,7 @@ const { determine } = require('jstz')
 const moment = require('moment')
 
 const timezoneName = determine().name()
-const oneSecond = 1000
 
-// const setPlaceholderText = (timestamp) => unixTimestampInput.placeholder = `Unix Timestamp eg: ${timestamp}`
-// setPlaceholderText(moment().unix())
-// setInterval(() => setPlaceholderText(moment().unix()), oneSecond)
 
 // const submit = (e) => {
 //   e.preventDefault()
@@ -53,5 +49,6 @@ function getUnixTimestamp(humanDate) {
 module.exports = {
   getUnixTimestamp,
   cleanDateUtc,
-  cleanDate
+  cleanDate,
+  timezoneName
 }
