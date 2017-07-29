@@ -13,7 +13,8 @@
     "datejs": "1.0.0-rc3",
     "jstimezonedetect": "1.0.5",
     "jstz": "1.0.10",
-    "moment": "2.10.3"
+    "moment": "2.10.3",
+    "react": "15.6.1"
   },
   "devDependencies": {
     "chai": "4.1.0",
