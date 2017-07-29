@@ -19,6 +19,10 @@ h1.lead {
 
 }
 
+/*#submit {
+	vertical-align: top;
+}*/
+
 #unixTimestampInput {
 	width: 260px;
 }
