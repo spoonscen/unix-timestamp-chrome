@@ -49,11 +49,26 @@ class App extends React.Component {
     const {unixTimestampInput, humanDateInputValue} = this.state
     const bothInputsEmpty = unixTimestampInput === '' && humanDateInputValue === ''
     const unixTimestampInputValue = bothInputsEmpty ? moment().unix() : unixTimestampInput
+    const parsedDate = Date.parse(humanDateInputValue)
+
+    if(!parsedDate) {
+      this.setState({humanDateInputValue: ''})
+      return null
+    }
+
     this.setState({
-      dateInYourTimeZone: cleanDate(unixTimestampInputValue),
-      dateInUtc: cleanDateUtc(unixTimestampInputValue),
-      unixTimeStamp: unixTimestampInputValue
+      dateInYourTimeZone: humanDateInputValue
+        ? cleanDate(getUnixTimestamp(humanDateInputValue))
+        : cleanDate(unixTimestampInputValue),
+      dateInUtc: humanDateInputValue
+        ? cleanDateUtc(getUnixTimestamp(humanDateInputValue))
+        : cleanDateUtc(unixTimestampInputValue),
+      unixTimeStamp: humanDateInputValue
+        ? getUnixTimestamp(humanDateInputValue)
+        : unixTimestampInputValue
     })
+
+    console.log(getUnixTimestamp(humanDateInputValue))
   }
 
   componentDidMount() {
