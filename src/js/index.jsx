@@ -1,5 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
+import moment from 'moment';
+import {getUnixTimestamp, cleanDate, cleanDateUtc} from './unixTimestampConverter'
 
 class App extends React.Component {
   constructor() {
@@ -14,7 +16,7 @@ class App extends React.Component {
     this.handleUnixInputDate = this.handleUnixInputDate.bind(this)
     this.handleHumanInputDate = this.handleHumanInputDate.bind(this)
     this.resetForm = this.resetForm.bind(this)
-
+    this.onSubmit = this.onSubmit.bind(this)
   }
 
   handleUnixInputDate(event) {
@@ -33,6 +35,18 @@ class App extends React.Component {
       dateInUtc: '',
       unixTimeStamp: ''
     });
+  }
+
+  onSubmit(event) {
+    event.preventDefault()
+    const {unixTimestampInput, humanDateInputValue} = this.state
+    const bothInputsEmpty = unixTimestampInput === '' && humanDateInputValue === ''
+    const unixTimestampInputValue = bothInputsEmpty ? moment().unix() : unixTimestampInput
+    this.setState({
+      dateInYourTimeZone: cleanDate(unixTimestampInputValue),
+      dateInUtc: cleanDateUtc(unixTimestampInputValue),
+      unixTimeStamp: unixTimestampInputValue
+    })
   }
 
 
@@ -60,14 +74,14 @@ class App extends React.Component {
     			</div>
     			<div id="buttonGroup">
     				<p>
-    					<button id="submit" type="submit" className="btn btn-primary">Convert</button>
+    					<button onClick={this.onSubmit} id="submit" type="submit" className="btn btn-primary">Convert</button>
     					<button onClick={this.resetForm} id="reset" type="reset" className="btn btn-warning">Reset</button>
     				</p>
     			</div>
     		</form>
-    		<p><strong><span id="yourTz">Your Timezone: </span></strong><span className="cleanDate">Date will display here</span></p>
-    		<p><strong>UTC: </strong><span className="cleanDateUtc">Date will display here</span></p>
-    		<p><strong>Unix: </strong><span className="convertedDateUnix">Timestamp will display here</span></p>
+    		<p><strong><span id="yourTz">Your Timezone: </span></strong><span className="cleanDate">{dateInYourTimeZone ? dateInYourTimeZone : 'Date will display here'}</span></p>
+    		<p><strong>UTC: </strong><span className="cleanDateUtc">{dateInUtc ? dateInUtc : 'Date will display here'}</span></p>
+    		<p><strong>Unix: </strong><span className="convertedDateUnix">{unixTimeStamp ? unixTimeStamp : 'Timestamp will display here'}</span></p>
     	</div>
     );
   }
