@@ -1,3 +1,9 @@
+html {
+	height: 357px;
+	max-height: 375px;
+	width: 300px;
+}
+
 body {
 	max-width: 103%;
 	width: 103%;
@@ -10,17 +16,14 @@ h1.lead {
 	margin-bottom: 1px;
 }
 
-.lead {
-	font-weight: bold;
-}
-
 .container {
 	margin: 0;
-
+	width: 300px;
 }
 
 #submit {
 	vertical-align: top;
+	margin-right: 3px;
 }
 
 #unixTimestampInput {
@@ -65,7 +68,7 @@ h6 {
 	font-weight: 200;
 	font-style: italic}
 
-html {
-	height: 357px;
-	max-height: 375px;
+
+.btn-warning:focus, .btn-primary:focus {
+	display: none;
 }

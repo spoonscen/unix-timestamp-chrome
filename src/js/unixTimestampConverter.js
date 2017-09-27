@@ -1,21 +1,21 @@
-require('datejs')
-const { determine } = require('jstz')
-const moment = require('moment')
+import 'datejs'
+import { determine } from 'jstz'
+import moment from 'moment'
 
-const timezoneName = determine().name()
+export const timezoneName = determine().name()
 
 const getDate = (timestamp) => new Date(timestamp * 1000)
-const dateFormat = 'MMMM Do YYYY, HH:mm:ss a'
+const dateFormat = 'MMM. DD, YYYY HH:mm:ss'
 
-function cleanDate(timestamp) {
+export function cleanDate(timestamp) {
   return moment(getDate(timestamp)).format(dateFormat)
 }
 
-function cleanDateUtc(timestamp) {
+export function cleanDateUtc(timestamp) {
   return moment.utc(getDate(timestamp)).format(dateFormat)
 }
 
-function getUnixTimestamp(humanDate) {
+export function getUnixTimestamp(humanDate) {
   const date = Date.parse(humanDate).getTime() / 1000
   return Math.round(date)
 }
