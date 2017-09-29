@@ -6,7 +6,8 @@
   "scripts": {
     "bundle": "webpack -p",
     "dev": "webpack -d --watch",
-    "test": "mocha ./js/unixTimestampConverter.spec.js"
+    "test": "mocha ./js/unixTimestampConverter.spec.js",
+    "zip": "rm -f public/bundle.map.js && zip -r -X chrome-web-store.zip . -i public\\* -i \"index.html\" -i \"manifest.json\""
   },
   "author": "",
   "license": "ISC",
