@@ -3,21 +3,32 @@ import { render } from 'react-dom';
 import moment from 'moment';
 import { getUnixTimestamp, cleanDate, cleanDateUtc, timezoneName } from './unixTimestampConverter'
 
+const getInitialState = () => ({
+  unixTimestampInput: '',
+  humanDateInputValue: '',
+  dateInYourTimeZone: '',
+  dateInUtc: '',
+  unixTimeStamp: '',
+  currentTime: moment().unix(),
+})
+
 class App extends React.Component {
   constructor() {
     super()
-    this.state = {
-      unixTimestampInput: '',
-      humanDateInputValue: '',
-      dateInYourTimeZone: '',
-      dateInUtc: '',
-      unixTimeStamp: '',
-      currentTime: moment().unix(),
-    }
+    const prevState = this.getStateFromStorage()
+    this.state = prevState ? prevState : getInitialState()
     this.handleUnixInputDate = this.handleUnixInputDate.bind(this)
     this.handleHumanInputDate = this.handleHumanInputDate.bind(this)
     this.resetForm = this.resetForm.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
+  }
+
+  setStateInStorage(state = this.state) {
+    localStorage.setItem('state', JSON.stringify(state))
+  }
+
+  getStateFromStorage() {
+    return JSON.parse(localStorage.getItem('state'))
   }
 
   handleUnixInputDate({ target: { value } }) {
@@ -35,13 +46,8 @@ class App extends React.Component {
   }
 
   resetForm() {
-    this.setState({
-      unixTimestampInput: '',
-      humanDateInputValue: '',
-      dateInYourTimeZone: '',
-      dateInUtc: '',
-      unixTimeStamp: ''
-    });
+    this.setState(getInitialState());
+    this.setStateInStorage(getInitialState())
   }
 
   onSubmit(event) {
@@ -55,8 +61,7 @@ class App extends React.Component {
     if (!parsedDate) {
       this.setState({ humanDateInputValue: '' })
     }
-
-    this.setState({
+    const newState = Object.assign({}, this.state, {
       dateInYourTimeZone: humanDateInputValue
         ? cleanDate(getUnixTimestamp(humanDateInputValue))
         : cleanDate(unixTimestampInputValue),
@@ -67,6 +72,8 @@ class App extends React.Component {
         ? getUnixTimestamp(humanDateInputValue)
         : unixTimestampInputValue
     })
+    this.setState(newState)
+    this.setStateInStorage(newState)
   }
 
   componentDidMount() {
