@@ -1,1 +1,1 @@
---require ./test/setup.js
+--require ./test/setup.js --compilers js:babel-core/register
