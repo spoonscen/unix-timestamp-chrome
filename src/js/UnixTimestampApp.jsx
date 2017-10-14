@@ -12,7 +12,7 @@ export const getInitialState = (currentTime) => ({
   currentTime,
 })
 
-export default class UnixTimestampApp extends React.Component {
+export class UnixTimestampApp extends React.Component {
   constructor() {
     super()
     const prevState = this.getStateFromStorage()
