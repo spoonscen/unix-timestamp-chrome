@@ -1,8 +1,10 @@
-const { expect } = require('chai')
+import { expect } from 'chai'
+import { getUnixTimestamp } from '../../src/js/unixTimestampConverter'
 
-const { unixTime, convertedDateUtc, cleanDate } = require('../../js/scripts')
-describe('scripts', () => {
-  it('does a thing', () => {
-    expect(unixTime).to.be.a('function')
+describe('unixTimestampConverter', () => {
+  describe('getUnixTimestamp', () => {
+    it('is a function', () => {
+      expect(getUnixTimestamp).to.be.a('function')
+    })
   })
 });
