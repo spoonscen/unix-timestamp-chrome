@@ -1,22 +1,22 @@
 import React from 'react';
 import { render } from 'react-dom';
 import moment from 'moment';
-import { getUnixTimestamp, cleanDate, cleanDateUtc, timezoneName } from './unixTimestampConverter'
+import { getUnixTimestamp, cleanDate, cleanDateUtc, timezoneName } from './timeUtils'
 
-const getInitialState = () => ({
+const getInitialState = (currentTime) => ({
   unixTimestampInput: '',
   humanDateInputValue: '',
   dateInYourTimeZone: '',
   dateInUtc: '',
   unixTimeStamp: '',
-  currentTime: moment().unix(),
+  currentTime,
 })
 
-class App extends React.Component {
+class UnixTimestampApp extends React.Component {
   constructor() {
     super()
     const prevState = this.getStateFromStorage()
-    this.state = prevState ? prevState : getInitialState()
+    this.state = prevState ? prevState : getInitialState(moment().unix())
     this.handleUnixInputDate = this.handleUnixInputDate.bind(this)
     this.handleHumanInputDate = this.handleHumanInputDate.bind(this)
     this.resetForm = this.resetForm.bind(this)
@@ -46,8 +46,9 @@ class App extends React.Component {
   }
 
   resetForm() {
-    this.setState(getInitialState());
-    this.setStateInStorage(getInitialState())
+    const initialState = getInitialState(moment().unix())
+    this.setState(initialState);
+    this.setStateInStorage(initialState)
   }
 
   onSubmit(event) {
@@ -138,4 +139,4 @@ class App extends React.Component {
   }
 }
 
-render(<App />, document.getElementById('app'));
+render(<UnixTimestampApp />, document.getElementById('app'));
