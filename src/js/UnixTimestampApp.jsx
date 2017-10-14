@@ -31,14 +31,14 @@ export class UnixTimestampApp extends React.Component {
     return JSON.parse(window.localStorage.getItem('state'))
   }
 
-  handleUnixInputDate({ target: { value } }) {
+  handleUnixInputDate({ target: { value = '' } }) {
     this.setState({
       unixTimestampInput: value.slice(0, 10),
       humanDateInputValue: ''
     })
   }
 
-  handleHumanInputDate({ target: { value } }) {
+  handleHumanInputDate({ target: { value = '' } }) {
     this.setState({
       humanDateInputValue: value,
       unixTimestampInput: ''
@@ -99,7 +99,7 @@ export class UnixTimestampApp extends React.Component {
         <h1 className="lead">Unix Timestamp Converter</h1>
         <form id="convertDateForm" className="form-inline">
           <div id="unixTimeInput" className="form-group">
-            <h6>Press "Convert" for the current time to be converted</h6>
+            <h6 className="sub-title">Press "Convert" for the current time to be converted</h6>
             <input
               onChange={this.handleUnixInputDate}
               value={unixTimestampInput}

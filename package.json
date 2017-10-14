@@ -31,6 +31,7 @@
     "enzyme-adapter-react-15": "^1.0.1",
     "jsdom": "11.1.0",
     "mocha": "3.4.2",
+    "node-storage-shim": "^1.0.1",
     "react-addons-test-utils": "^15.6.2",
     "sinon": "4.0.1",
     "source-map-loader": "^0.2.1",

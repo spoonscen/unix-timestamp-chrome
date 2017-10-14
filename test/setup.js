@@ -1,6 +1,7 @@
 const { JSDOM } = require('jsdom');
 const jsdom = new JSDOM('<!doctype html><html><body></body></html>');
 const { window } = jsdom;
+const StorageShim = require('node-storage-shim')
 const sinon = require('sinon');
 
 function copyProps(src, target) {
@@ -11,10 +12,7 @@ function copyProps(src, target) {
 }
 
 global.window = window;
-global.window.localStorage = {
-  setItem: sinon.stub().returns(undefined),
-  getItem: sinon.stub().returns("{}")
-}
+global.window.localStorage = new StorageShim()
 global.document = window.document;
 global.navigator = {
   userAgent: 'node.js'
