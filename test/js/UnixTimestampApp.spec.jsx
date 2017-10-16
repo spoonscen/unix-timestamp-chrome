@@ -76,7 +76,7 @@ describe('<UnixTimestampApp />', () => {
   })
 
   describe('input behavior', () => {
-    it('only allows one input to have value at at time', () => {
+    it('only allows only one input to have value at at time', () => {
       const humanReadableDate = wrapper.find('#fulldate')
       const unixTimestampInput = wrapper.find('#unixTimestampInput')
 
@@ -95,6 +95,29 @@ describe('<UnixTimestampApp />', () => {
       expect(unixTimestampInput.props().value).to.eq('1')
       expect(humanReadableDate.props().value).to.eq('')
     }) 
+  })
+
+  describe('reset button behavior', () => {
+    it('resets both inputs', () => {
+      const humanReadableDate = wrapper.find('#fulldate')
+      const unixTimestampInput = wrapper.find('#unixTimestampInput')
+      const resetButton = wrapper.find('#reset')
+
+      expect(humanReadableDate.props().value).to.eq('')
+      expect(unixTimestampInput.props().value).to.eq('')
+
+      unixTimestampInput.simulate('change', { target: { value: '1' } })
+      resetButton.simulate('click')
+
+      expect(humanReadableDate.props().value).to.eq('')
+      expect(unixTimestampInput.props().value).to.eq('')
+
+      humanReadableDate.simulate('change', { target: { value: HUMAN_DATE } })
+      resetButton.simulate('click')
+
+      expect(humanReadableDate.props().value).to.eq('')
+      expect(unixTimestampInput.props().value).to.eq('')
+    })
   })
 
 })
