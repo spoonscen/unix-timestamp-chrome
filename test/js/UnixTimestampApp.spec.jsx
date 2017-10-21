@@ -76,7 +76,7 @@ describe('<UnixTimestampApp />', () => {
   })
 
   describe('input behavior', () => {
-    it('only allows only one input to have value at at time', () => {
+    it('only allows only one input to have value at a time', () => {
       const humanReadableDate = wrapper.find('#fulldate')
       const unixTimestampInput = wrapper.find('#unixTimestampInput')
 
@@ -117,6 +117,47 @@ describe('<UnixTimestampApp />', () => {
 
       expect(humanReadableDate.props().value).to.eq('')
       expect(unixTimestampInput.props().value).to.eq('')
+    })
+
+    it('resets date results', () => {
+      const humanReadableDate = wrapper.find('#fulldate')
+      const unixTimestampInput = wrapper.find('#unixTimestampInput')
+      const resetButton = wrapper.find('#reset')
+      const cleanDate = wrapper.find('.cleanDate')
+      const cleanDateUtc = wrapper.find('.cleanDateUtc')
+      const convertedDateUnix = wrapper.find('.convertedDateUnix')
+      const submitButton = wrapper.find('#submit')
+
+      expect(cleanDate.text()).to.equal('Date will display here')
+      expect(cleanDateUtc.text()).to.equal('Date will display here')
+      expect(convertedDateUnix.text()).to.equal('Timestamp will display here')
+
+      unixTimestampInput.simulate('change', { target: { value: String(JAN_FIRST_2017) } })
+      submitButton.simulate('click')
+
+      expect(cleanDate.text()).to.equal('Jan. 01, 2017 00:00:00')
+      expect(cleanDateUtc.text()).to.equal('Jan. 01, 2017 05:00:00')
+      expect(convertedDateUnix.text()).to.equal(String(JAN_FIRST_2017))
+
+      resetButton.simulate('click')
+
+      expect(cleanDate.text()).to.equal('Date will display here')
+      expect(cleanDateUtc.text()).to.equal('Date will display here')
+      expect(convertedDateUnix.text()).to.equal('Timestamp will display here')
+
+      humanReadableDate.simulate('change', { target: { value: HUMAN_DATE } })
+      submitButton.simulate('click')
+
+      expect(cleanDate.text()).to.equal('Jan. 01, 2017 00:00:00')
+      expect(cleanDateUtc.text()).to.equal('Jan. 01, 2017 05:00:00')
+      expect(convertedDateUnix.text()).to.equal(String(JAN_FIRST_2017))
+      
+      resetButton.simulate('click')
+
+      expect(cleanDate.text()).to.equal('Date will display here')
+      expect(cleanDateUtc.text()).to.equal('Date will display here')
+      expect(convertedDateUnix.text()).to.equal('Timestamp will display here')
+      
     })
   })
 
