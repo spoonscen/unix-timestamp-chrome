@@ -16,10 +16,19 @@ const config = {
         test: /\.jsx?/,
         include: APP_DIR,
         loader: 'babel-loader',
+        query: {
+          presets: ['env', 'react']
+        }
       }
     ]
   },
-  devtool: 'source-maps'
+  devtool: 'source-maps',
+  resolve: {
+    extensions: [
+      '.js',
+      '.jsx'
+  ]
+}
 };
 
 module.exports = config;
