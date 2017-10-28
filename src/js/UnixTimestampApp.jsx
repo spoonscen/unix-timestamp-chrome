@@ -2,8 +2,9 @@ import React from 'react';
 import { render } from 'react-dom';
 import moment from 'moment';
 import { getUnixTimestamp, cleanDate, cleanDateUtc, timezoneName } from './timeUtils'
-import {ResultRow} from './components/ResultRow'
-import {ButtonGroup} from './components/ButtonGroup'
+import { ResultRow } from './components/ResultRow'
+import { ButtonGroup } from './components/ButtonGroup'
+import { InputGroup } from './components/InputGroup'
 
 export const getInitialState = (currentTime) => ({
   unixTimestampInput: '',
@@ -100,52 +101,33 @@ export class UnixTimestampApp extends React.Component {
       <div className="container">
         <h1 className="lead">Unix Timestamp Converter</h1>
         <form id="convertDateForm" className="form-inline">
-          <div id="unixTimeInput" className="form-group">
-            <h6 className="sub-title">Press "Convert" for the current time to be converted</h6>
-            <input
-              onChange={this.handleUnixInputDate}
-              value={unixTimestampInput}
-              className="form-control"
-              name="number"
-              id="unixTimestampInput"
-              type="number"
-              placeholder={`Unix Timestamp eg: ${currentTime}`}
-              min="-999999999999"
-              max="999999999999"
-            />
-          </div>
-          <h5>or enter a date in any format</h5>
-          <div className="form-group" id="humanReadableDate">
-            <input
-              onChange={this.handleHumanInputDate}
-              value={humanDateInputValue}
-              className="form-control"
-              name="fulldate"
-              type="text/number"
-              id="fulldate"
-              placeholder="eg: 01/01/1970 12:30 pm"
-            />
-          </div>
+          <InputGroup
+            unixTimestampOnChange={this.handleUnixInputDate}
+            unixTimestampVal={unixTimestampInput}
+            currentTime={currentTime}
+            humanDateOnChange={this.handleHumanInputDate}
+            humanDateVal={humanDateInputValue}
+          />
           <ButtonGroup submitFn={this.onSubmit} resetFn={this.resetForm} />
         </form>
-        <ResultRow 
-          label={timezoneName} 
-          className="cleanDate" 
-          result={dateInYourTimeZone} 
-          placeholder='Date will display here' 
-        /> 
-        <ResultRow 
+        <ResultRow
+          label={timezoneName}
+          className="cleanDate"
+          result={dateInYourTimeZone}
+          placeholder='Date will display here'
+        />
+        <ResultRow
           label='UTC'
-          className="cleanDateUtc" 
-          result={dateInUtc} 
-          placeholder='Date will display here' 
-        /> 
-        <ResultRow 
-          label='Unix' 
-          className="convertedDateUnix" 
-          result={unixTimeStamp} 
-          placeholder='Timestamp will display here' 
-        />         
+          className="cleanDateUtc"
+          result={dateInUtc}
+          placeholder='Date will display here'
+        />
+        <ResultRow
+          label='Unix'
+          className="convertedDateUnix"
+          result={unixTimeStamp}
+          placeholder='Timestamp will display here'
+        />
       </div>
     );
   }
