@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import moment from 'moment';
 import { getUnixTimestamp, cleanDate, cleanDateUtc, timezoneName } from './timeUtils'
 import {ResultRow} from './components/ResultRow'
+import {ButtonGroup} from './components/ButtonGroup'
 
 export const getInitialState = (currentTime) => ({
   unixTimestampInput: '',
@@ -125,12 +126,7 @@ export class UnixTimestampApp extends React.Component {
               placeholder="eg: 01/01/1970 12:30 pm"
             />
           </div>
-          <div id="buttonGroup">
-            <p>
-              <button onClick={this.onSubmit} id="submit" type="submit" className="btn btn-primary">Convert</button>
-              <button onClick={this.resetForm} id="reset" type="reset" className="btn btn-warning">Reset</button>
-            </p>
-          </div>
+          <ButtonGroup submitFn={this.onSubmit} resetFn={this.resetForm} />
         </form>
         <ResultRow 
           label={timezoneName} 
