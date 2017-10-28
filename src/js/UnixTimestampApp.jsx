@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import moment from 'moment';
 import { getUnixTimestamp, cleanDate, cleanDateUtc, timezoneName } from './timeUtils'
-import { ResultRow } from './components/ResultRow'
+import { ResultGroup } from './components/ResultGroup'
 import { ButtonGroup } from './components/ButtonGroup'
 import { InputGroup } from './components/InputGroup'
 
@@ -110,23 +110,11 @@ export class UnixTimestampApp extends React.Component {
           />
           <ButtonGroup submitFn={this.onSubmit} resetFn={this.resetForm} />
         </form>
-        <ResultRow
-          label={timezoneName}
-          className="cleanDate"
-          result={dateInYourTimeZone}
-          placeholder='Date will display here'
-        />
-        <ResultRow
-          label='UTC'
-          className="cleanDateUtc"
-          result={dateInUtc}
-          placeholder='Date will display here'
-        />
-        <ResultRow
-          label='Unix'
-          className="convertedDateUnix"
-          result={unixTimeStamp}
-          placeholder='Timestamp will display here'
+        <ResultGroup
+          timezoneName={timezoneName}
+          dateInYourTimeZone={dateInYourTimeZone}
+          dateInUtc={dateInUtc}
+          unixTimeStamp={unixTimeStamp}
         />
       </div>
     );

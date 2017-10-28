@@ -3,8 +3,8 @@ import { expect } from 'chai'
 import { mount } from 'enzyme'
 import sinon from 'sinon'
 import moment from 'moment'
-import {UnixTimestampApp, getInitialState} from '../../src/js/UnixTimestampApp'
- 
+import { UnixTimestampApp, getInitialState } from '../../src/js/UnixTimestampApp'
+
 describe('<UnixTimestampApp />', () => {
   let wrapper
   let sandbox
@@ -35,11 +35,11 @@ describe('<UnixTimestampApp />', () => {
     it('has a sub-title', () => {
       expect(wrapper.find('.sub-title').text()).to.equal('Press "Convert" for the current time to be converted')
     })
-  
+
     it('has two inputs', () => {
       expect(wrapper.find('input').length).to.equal(2)
     })
-    
+
     it('has two buttons', () => {
       expect(wrapper.find('button').length).to.equal(2)
     })
@@ -60,7 +60,7 @@ describe('<UnixTimestampApp />', () => {
       expect(wrapper.find('.cleanDate').text()).to.equal('Jan. 01, 2017 00:00:00')
       expect(wrapper.find('.cleanDateUtc').text()).to.equal('Jan. 01, 2017 05:00:00')
       expect(wrapper.find('.convertedDateUnix').text()).to.equal(String(JAN_FIRST_2017))
-    }) 
+    })
   })
 
   describe('Human date conversion', () => {
@@ -72,7 +72,7 @@ describe('<UnixTimestampApp />', () => {
       expect(wrapper.find('.cleanDate').text()).to.equal('Jan. 01, 2017 00:00:00')
       expect(wrapper.find('.cleanDateUtc').text()).to.equal('Jan. 01, 2017 05:00:00')
       expect(wrapper.find('.convertedDateUnix').text()).to.equal(String(JAN_FIRST_2017))
-    }) 
+    })
   })
 
   describe('input behavior', () => {
@@ -94,7 +94,7 @@ describe('<UnixTimestampApp />', () => {
       unixTimestampInput.simulate('change', { target: { value: '1' } })
       expect(unixTimestampInput.props().value).to.eq('1')
       expect(humanReadableDate.props().value).to.eq('')
-    }) 
+    })
   })
 
   describe('reset button behavior', () => {
@@ -151,13 +151,13 @@ describe('<UnixTimestampApp />', () => {
       expect(cleanDate.text()).to.equal('Jan. 01, 2017 00:00:00')
       expect(cleanDateUtc.text()).to.equal('Jan. 01, 2017 05:00:00')
       expect(convertedDateUnix.text()).to.equal(String(JAN_FIRST_2017))
-      
+
       resetButton.simulate('click')
 
       expect(cleanDate.text()).to.equal('Date will display here')
       expect(cleanDateUtc.text()).to.equal('Date will display here')
       expect(convertedDateUnix.text()).to.equal('Timestamp will display here')
-      
+
     })
   })
 

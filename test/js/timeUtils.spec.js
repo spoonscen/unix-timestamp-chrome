@@ -4,7 +4,7 @@ import { getUnixTimestamp, getDate, cleanDate, cleanDateUtc } from '../../src/js
 describe('timeUtils', () => {
   const JAN_FIRST_2017 = 1483246800
   const HUMAN_DATE = '01/01/2017'
-  
+
   describe('getUnixTimestamp', () => {
     it('is a function', () => {
       expect(getUnixTimestamp).to.be.a('function')
