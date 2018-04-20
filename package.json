@@ -6,8 +6,8 @@
   "scripts": {
     "bundle": "webpack -p",
     "dev": "webpack -d --watch",
-    "test": "mocha \"./test/**/*.spec.js\"",
-    "tdd": "mocha -w \"./test/**/*.spec.js\"",
+    "test": "mocha \"./test/**/*.spec.{js,jsx}\"",
+    "tdd": "mocha -w \"./test/**/*.spec.{js,jsx}\"",
     "zip": "rm -f public/bundle.map.js && zip -r -X chrome-web-store.zip . -i public\\* -i \"index.html\" -i \"manifest.json\""
   },
   "author": "",
@@ -19,7 +19,7 @@
     "datejs": "1.0.0-rc3",
     "jstimezonedetect": "1.0.5",
     "jstz": "1.0.10",
-    "moment": "2.10.3",
+    "moment": "^2.22.1",
     "react": "15.6.1",
     "react-dom": "15.6.1"
   },
@@ -27,8 +27,13 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-es2017": "6.24.1",
     "chai": "4.1.0",
+    "enzyme": "2.8.0",
+    "enzyme-adapter-react-15": "^1.0.1",
     "jsdom": "11.1.0",
     "mocha": "3.4.2",
+    "node-storage-shim": "^1.0.1",
+    "react-addons-test-utils": "^15.6.2",
+    "sinon": "4.0.1",
     "source-map-loader": "^0.2.1",
     "webpack": "3.4.1"
   }
