@@ -1,8 +1,8 @@
-const webpack = require('webpack');
-const path = require('path');
+const webpack = require('webpack')
+const path = require('path')
 
-const BUILD_DIR = path.resolve(__dirname, 'public');
-const APP_DIR = path.resolve(__dirname, 'src/js');
+const BUILD_DIR = path.resolve(__dirname, 'public')
+const APP_DIR = path.resolve(__dirname, 'src/js')
 
 const config = {
   entry: APP_DIR + '/index.jsx',
@@ -27,8 +27,8 @@ const config = {
     extensions: [
       '.js',
       '.jsx'
-  ]
+    ]
+  }
 }
-};
 
-module.exports = config;
+module.exports = config
